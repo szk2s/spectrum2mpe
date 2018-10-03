@@ -2,4 +2,4 @@
 Next generation software for music production.  
 This is intended as an alternative to DAWs  
    
-If you want to try, type "npm i", then "node app.js"
+If you want to try, type `npm i`, then `npm start`
