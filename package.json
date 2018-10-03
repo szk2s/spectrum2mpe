@@ -1,0 +1,35 @@
+{
+  "name": "neuron",
+  "version": "0.0.1",
+  "description": "Next generation software for music production.",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "jazz-midi": "^1.6.4",
+    "jzz": "^0.5.7",
+    "jzz-midi-smf": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szk2s/Neuron.git"
+  },
+  "keywords": [
+    "MPE",
+    "Matrix",
+    "Music",
+    "MIDI",
+    "generator"
+  ],
+  "author": "SATOSHI SUZUKI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/szk2s/Neuron/issues"
+  },
+  "homepage": "https://github.com/szk2s/Neuron#readme"
+}

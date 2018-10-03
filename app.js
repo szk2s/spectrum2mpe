@@ -4,7 +4,7 @@ const Patcher = require('./lib/Patcher');
 const config = {
     inputFreqsFilepath : './assets/test/cello_freqs_16ch.csv',
     inputAmpsFilepath : './assets/test/cello_amps_16ch.csv',
-    outputFileName : 'test3.mid',
+    outputFileName : 'cello_test.mid',
     outputDeviceName : 'Apple DLS Synth',
     ppqr : 48,   // ticks per quarter note
     bpm : 120,
