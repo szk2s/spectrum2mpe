@@ -10,7 +10,8 @@
     "glob": "^7.1.3",
     "jazz-midi": "^1.6.4",
     "jzz": "^0.5.7",
-    "jzz-midi-smf": "^1.0.3"
+    "jzz-midi-smf": "^1.0.3",
+    "node-osc": "^2.1.0"
   },
   "devDependencies": {},
   "scripts": {
