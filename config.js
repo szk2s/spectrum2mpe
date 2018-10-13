@@ -1,8 +1,8 @@
 module.exports = {
-    inputFreqsFilepath : './assets/user/csv/church2_freqs.csv',
-    inputAmpsFilepath : './assets/user/csv/church2_amps.csv',
-    inputTimecodeFilepath : './assets/user/csv/church2_timecode.csv',
-    inputEnvFilepath:  './assets/user/csv/child_env.csv',
+    inputFreqsFilepath : './assets/test/csv/bird_freqs.csv',
+    inputAmpsFilepath : './assets/test/csv/bird_amps.csv',
+    inputTimecodeFilepath : './assets/test/csv/bird_timecode.csv',
+    inputEnvFilepath:  './assets/test/csv/child_env.csv',
     outputFilepath : './output/church2.mid',
     outputDeviceName : 'IAC Driver Bus 1',
     ppqr : 96,   // ticks per quarter note
