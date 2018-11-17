@@ -1,6 +1,2 @@
-# Neuron  
-Next generation software for music production.  
-Now this is beta of beta.
-This is intended to be an alternative to DAWs finally.  
-   
-If you want to try, type `npm i`, then `npm start`
+# spectrum2mpe  
+Convert spectrum data from MATLAB or SPEAR, into Standard MIDI File which is compatible with mpe applications.
