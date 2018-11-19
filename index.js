@@ -1,20 +1,25 @@
 const _ = require('lodash');
 const fs = require('fs');
 const path = require('path');
-const Utils = require('./lib/Utils');
+const Utils = require('./lib/utils/Utils');
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
 const osc = require('node-osc');
 const moment = require('moment');
+const defaultConfig = require('./defaultConfig');
 
 class S2M {
-    constructor(){
-        this.config = require('./defaultConfig');
+    constructor(environmentConfig){
+        S2M.hasInstance = true;
+        this.config = _.merge(defaultConfig, environmentConfig);
     }
 
-    build(environmentConfig){
-        const defaultConfig = this.config;
-        this.config = _.merge(defaultConfig, environmentConfig);
+    static build(environmentConfig){
+        if ( !S2M.hasInstance ) {
+            const s2m = new S2M(environmentConfig);
+            return s2m;
+        }
+        throw new Error("S2M already has an instance");
     }
 
     // async convertFromSpear(songName){
@@ -229,5 +234,6 @@ class S2M {
         })
     }
 }
+S2M.hasInstance = false;
 
-module.exports = new S2M();
+module.exports = S2M;
