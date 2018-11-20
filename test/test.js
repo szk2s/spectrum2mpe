@@ -3,7 +3,7 @@ const S2M = require('..');
 const environmentConfig = require('./config');
 
 const s2m = S2M.build(environmentConfig);
-s2m.convertFromMatlab('bird');
+s2m.convertFromSpear('large_bowl');
 
 // describe('Build s2m', function() {
 //   it(
