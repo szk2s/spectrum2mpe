@@ -1,8 +1,8 @@
 const assert = require('chai').assert;
-const s2m = require('..');
+const S2M = require('..');
 const environmentConfig = require('./config');
 
-s2m.build(environmentConfig);
+const s2m = S2M.build(environmentConfig);
 s2m.convertFromMatlab('bird');
 
 // describe('Build s2m', function() {
