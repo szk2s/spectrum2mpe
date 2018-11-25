@@ -7,7 +7,7 @@ module.exports = {
     oscClient : {ip : '127.0.0.1', port : 1234},
     slideCC : 74,
     directories : {
-        assets : '/Users/satoshisuzuki/git/spectrum2mpe/test/assets',
-        output : '/Users/satoshisuzuki/git/spectrum2mpe/test/output'
+        assets : __dirname + '/assets',
+        output : __dirname + '/output'
     }
 };
