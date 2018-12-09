@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 import soundfile as sf
 import sounddevice as sd
 
-[data, fs] = sf.read("./test/assets/wav/5_module1_zim.wav")
-# sd.play(data, fs)
+[data, fs] = sf.read("./test/assets/wav/test.wav")
+sd.play(data, fs)
 
 #Compute and plot the spectrogram.
 f, t, Sxx = signal.spectrogram(data, fs)
