@@ -1,0 +1,14 @@
+{
+  "name": "s2m-viewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Yuichi Yogo",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^3.0.12"
+  }
+}
