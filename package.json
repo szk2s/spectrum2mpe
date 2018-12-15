@@ -20,7 +20,9 @@
     "moment": "^2.22.2",
     "node-osc": "^2.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/szk2s/spectrum2mpe.git"
