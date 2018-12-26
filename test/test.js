@@ -79,12 +79,20 @@ describe('smfsBatchExport', function() {
     it(
         'should export multiple midi files', 
         async function(){
-            const destination = __dirname + '/output';
-            s2m.smfsBatchExport(smfs, 'large_bowl', destination,
-                { makeOutputFolder: true, outputFolderName: 'exported-with-smfsBatchExport-function'}
+            const manyPartials = await s2m.txtImport(__dirname + '/assets/txt/long_text.txt');
+            const manyMelodies = await s2m.partials2melodies(manyPartials);
+            const manySmfs = await s2m.genSMFs(manyMelodies, 'test-song');
+            await s2m.smfsBatchExport(
+                manySmfs, 
+                'long_text', 
+                __dirname + '/output', 
+                {
+                    makeOutputFolder: true,
+                    outputFolderName: 'exported-with-smfsBatchExport-function'
+                }
             );
 
-            const outputFolderPath = destination + '/exported-with-smfsBatchExport-function'
+            const outputFolderPath = __dirname + '/output' + '/exported-with-smfsBatchExport-function'
             const folderExists = fs.existsSync(outputFolderPath);
             assert.equal(folderExists, true);
 
