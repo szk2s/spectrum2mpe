@@ -5,6 +5,7 @@ require('jzz-midi-smf')(JZZ);
 const mime = require('mime-types');
 const fs = require('fs');
 const path = require('path');
+const rimraf = require('rimraf');
 
 let partials;
 let melodies;
@@ -96,24 +97,36 @@ describe('smfsBatchExport', function() {
             const manyPartials = await s2m.txtImport(__dirname + '/assets/txt/long_text.txt');
             const manyMelodies = await s2m.partials2melodies(manyPartials);
             const manySmfs = await s2m.genSMFs(manyMelodies, 'test-song');
+            const dir = __dirname + '/output/exported-with-smfsBatchExport-function';
+            if( fs.existsSync(dir) ){
+                rimraf.sync(dir);
+                fs.mkdirSync(dir);
+            } else {
+                fs.mkdirSync(dir);
+            }
             await s2m.smfsBatchExport(
                 manySmfs, 
                 'long_text', 
-                __dirname + '/output', 
-                {
-                    makeOutputFolder: true,
-                    outputFolderName: 'exported-with-smfsBatchExport-function'
-                }
+                __dirname + '/output/exported-with-smfsBatchExport-function', 
+                { makeOutputFolder: false }
             );
 
-            const outputFolderPath = __dirname + '/output' + '/exported-with-smfsBatchExport-function'
-            const folderExists = fs.existsSync(outputFolderPath);
+            const folderExists = fs.existsSync(dir);
             assert.equal(folderExists, true);
 
-            fs.readdirSync(outputFolderPath).forEach(fileName => {
-                const filetype = mime.lookup(path.join(outputFolderPath, fileName));
-                assert.equal(filetype, 'audio/midi');
+            const checkFiles = () => new Promise((resolve, reject) => {
+                fs.readdirSync(dir).forEach(fileName => {
+                    const filetype = mime.lookup(path.join(dir, fileName));
+                    assert.equal(filetype, 'audio/midi');
+                    resolve();
+                })
             })
+            
+            (async () => {
+                await checkFiles();
+                console.log('done');
+                done();
+            })();
         }
     )
 });
