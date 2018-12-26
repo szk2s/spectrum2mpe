@@ -21,20 +21,20 @@ Then install dependencies.
 ```
 npm i
 ```
-Run test code and see the result.
+Run example code and see the result.
 ```
-npm test
+node examples/convert.js
 ```
 
 ## Usage
-Check test code `./test/test.js`
-
 ```
-const S2M = require('..');
-const environmentConfig = require('./config');
-const s2m = S2M.build(environmentConfig);
-s2m.convertFromSpear('large_bowl');
+( async () => {
+  const s2m = require('s2m');
+  await s2m.convertFromSpear('path/to/file');
+})();
 ```
+(await s2m.convertFromSpear('path/to/file');})();
+For more information, check example code `./examples/convert.js`
 
 ## References
 [What's MPE?](http://mpe.js.org/ "mpe.js")  

@@ -75,6 +75,20 @@ describe('smfExport', function() {
     )
 });
 
+describe('Convert', function() {
+    it(
+        'should export midi file', 
+        async function(){
+            await s2m.convertFromSpear(
+                __dirname + '/assets/txt/large_bowl.txt', 
+                { outputDirName: __dirname + '/output', makeOutputFolder: true, outputFolderName: 'exported-with-convertFromSpear-function'}
+            );
+            const filetype = mime.lookup(__dirname + '/output/exported-with-convertFromSpear-function/large_bowl.mid');
+            assert.equal(filetype, 'audio/midi');
+        }
+    )
+});
+
 describe('smfsBatchExport', function() {
     it(
         'should export multiple midi files', 
