@@ -7,14 +7,14 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "test.js",
-            "program": "${workspaceFolder}/test/test.js"
+            "name": "examples/convert.js",
+            "program": "${workspaceFolder}/examples/convert.js"
         },
         {
-            "type": "python",
+            "type": "node",
             "request": "launch",
-            "name": "analyser.py",
-            "program": "${workspaceFolder}/analyser.py"
+            "name": "examples/convert_long_text.js",
+            "program": "${workspaceFolder}/examples/convert_long_text.js"
         }
     ]
 }
