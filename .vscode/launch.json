@@ -15,6 +15,12 @@
             "request": "launch",
             "name": "examples/convert_long_text.js",
             "program": "${workspaceFolder}/examples/convert_long_text.js"
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "examples/play.js",
+            "program": "${workspaceFolder}/examples/play.js"
+        },
     ]
 }
