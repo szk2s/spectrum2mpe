@@ -7,7 +7,8 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "mocha --timeout 150000"
+    "test": "mocha --timeout 150000",
+    "lint": "eslint lib/**.js examples/**.js index.js --fix"
   },
   "dependencies": {
     "chai": "^4.2.0",
@@ -23,7 +24,11 @@
     "plotly": "^1.0.6"
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.1",
     "eslint": "^5.10.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "prettier": "^1.15.3",
     "rimraf": "^2.6.2"
   },
   "repository": {
