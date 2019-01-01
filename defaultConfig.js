@@ -1,6 +1,6 @@
 module.exports = {
     outputDeviceName : 'IAC Driver Bus 1',
-    ppqr : 48,   // ticks per quarter note
+    ppqn : 48,   // ticks per quarter note
     bpm : 120,
     defaultVelocity : 10,
     pitchBendRange : 48,
