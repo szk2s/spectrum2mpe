@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "mocha --timeout 150000",
-    "lint": "eslint lib/**.js examples/**.js index.js --fix"
+    "lint": "eslint lib/**/*.js lib/*.js examples/*.js index.js --fix"
   },
   "dependencies": {
     "chai": "^4.2.0",
