@@ -1,1 +1,3 @@
 lib/viewer/viewer.js
+node_modules
+test
