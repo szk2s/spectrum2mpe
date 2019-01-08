@@ -81,7 +81,7 @@ describe('Convert', function() {
 });
 
 describe('smfsBatchExport', function() {
-  it('should export multiple midi files', async function() {
+  it.skip('should export multiple midi files', async function() {
     const manyPartials = await s2m.txtImport(
       __dirname + '/assets/txt/long_text.txt'
     );
