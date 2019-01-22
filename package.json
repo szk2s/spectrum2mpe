@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mocha --timeout 150000",
+    "test:unit": "mocha test/unit --timeout 150000",
     "lint": "eslint . --fix"
   },
   "dependencies": {
