@@ -1,5 +1,5 @@
 const { expect, assert } = require('chai');
-const s2m = require('..');
+const s2m = require('../..');
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
 const mime = require('mime-types');
