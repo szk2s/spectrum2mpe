@@ -28,6 +28,12 @@
             "request": "launch",
             "name": "examples/readSMF.js",
             "program": "${workspaceFolder}/examples/readSMF.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "examples/convertFromMatlab.js",
+            "program": "${workspaceFolder}/examples/convertFromMatlab.js"
         }
     ]
 }
