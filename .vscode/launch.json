@@ -34,6 +34,12 @@
             "request": "launch",
             "name": "examples/convertFromMatlab.js",
             "program": "${workspaceFolder}/examples/convertFromMatlab.js"
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "examples/compressPartials.js",
+            "program": "${workspaceFolder}/examples/compressPartials.js"
+        },
     ]
 }
