@@ -7,7 +7,7 @@ const { convertFromSpear } = require('./convert');
 const { smfPlay, smfsMultiPlay, outputPorts, refreshPorts } = require('./play');
 const reducePartials = require('./reducePartials');
 
-module.exports = {
+const s2m = {
   utils,
   txtImport,
   jsonImport,
@@ -23,3 +23,5 @@ module.exports = {
   refreshPorts,
   reducePartials
 };
+
+module.exports = s2m;

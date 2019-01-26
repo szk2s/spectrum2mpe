@@ -2,7 +2,7 @@
   "name": "spectrum2mpe",
   "version": "0.0.1",
   "description": "Convert spectrum data into MPE compatible midi-file.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib"
   },
