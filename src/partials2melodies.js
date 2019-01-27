@@ -1,8 +1,6 @@
 /* @flow */
 import { normalize, ftom } from './utils';
 import { NOTE_STATUS, INIT_MELODY, INIT_PARTIAL } from './constants';
-type Melody = typeof INIT_MELODY;
-type Partial = typeof INIT_PARTIAL;
 
 const partials2melodies = (_partials: Array<Partial>): Promise<Array<Melody>> => {
   return new Promise((resolve) => {

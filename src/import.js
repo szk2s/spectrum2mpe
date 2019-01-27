@@ -6,7 +6,6 @@ require('jzz-midi-smf')(JZZ);
 import mime from 'mime-types';
 import * as path from 'path';
 import INIT_PARTIAL from './constants/INIT_PARTIAL';
-type Partial = typeof INIT_PARTIAL;
 
 const txtImport = (inputFilepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
