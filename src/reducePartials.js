@@ -19,4 +19,4 @@ const reducePartials = (partials) =>
     resolve();
   });
 
-module.exports = reducePartials;
+module.exports = { reducePartials };

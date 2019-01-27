@@ -1,8 +1,8 @@
 const path = require('path');
 const _ = require('lodash');
 const { txtImport } = require('./import');
-const partials2melodies = require('./partials2melodies');
-const genSMFs = require('./genSMFs');
+const { partials2melodies } = require('./partials2melodies');
+const { genSMFs } = require('./genSMFs');
 const { smfsBatchExport } = require('./export');
 
 const convertFromSpear = (

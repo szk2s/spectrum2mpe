@@ -92,4 +92,4 @@ function partials2melodies(_partials) {
   });
 }
 
-module.exports = partials2melodies;
+module.exports = { partials2melodies };

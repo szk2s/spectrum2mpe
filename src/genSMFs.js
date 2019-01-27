@@ -127,4 +127,4 @@ function genSMFs(
   });
 }
 
-module.exports = genSMFs;
+module.exports = { genSMFs };
