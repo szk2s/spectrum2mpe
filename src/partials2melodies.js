@@ -1,6 +1,6 @@
 /* @flow */
 import { normalize, ftom } from './utils';
-import { NOTE_STATUS, INIT_MELODY, INIT_PARTIAL } from './constants';
+import { NOTE_STATUS } from './constants';
 
 const partials2melodies = (_partials: Array<Partial>): Promise<Array<Melody>> => {
   return new Promise((resolve) => {
