@@ -1,24 +1,29 @@
-const fs = require('fs');
+/* @flow */
+
+import fs from 'fs';
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
-const mime = require('mime-types');
-const path = require('path');
+import mime from 'mime-types';
+import * as path from 'path';
+import INIT_PARTIAL from './constants/INIT_PARTIAL';
+type Partial = typeof INIT_PARTIAL;
 
-function txtImport(inputFilepath) {
+const txtImport = (inputFilepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
   const text = fs.readFileSync(inputFilepath).toString();
   const partials = parseText(text);
   return Promise.resolve(partials);
-}
+};
 
-const jsonImport = (inputFilepath) => {
+const jsonImport = (inputFilepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
-  const matlabFormatObj = JSON.parse(fs.readFileSync(inputFilepath));
+  const inputText = fs.readFileSync(inputFilepath, 'utf8');
+  const matlabFormatObj = JSON.parse(inputText);
   const partials = formatAsPartials(matlabFormatObj);
   return Promise.resolve(partials);
 };
 
-const smfImport = (inputPath) => {
+const smfImport = (inputPath: string): Promise<Array<any>> => {
   if (fs.lstatSync(inputPath).isFile() && mime.lookup(inputPath) == 'audio/midi') {
     const smfs = singleSmfImport(inputPath);
     return Promise.resolve(smfs);
@@ -31,7 +36,7 @@ const smfImport = (inputPath) => {
 };
 
 // define subfunctions
-function parseText(text) {
+function parseText(text: string): Array<Partial> {
   const textArray = text.split('\n');
   if (textArray[textArray.length - 1] == '') {
     textArray.pop();
@@ -45,9 +50,11 @@ function parseText(text) {
     if (idx % 2 === 0) {
       partials.push({
         id: floatArray[0],
-        numFrames: floatArray[1],
         startTime: floatArray[2],
-        endTime: floatArray[3]
+        endTime: floatArray[3],
+        timecode: [],
+        freqs: [],
+        amps: []
       });
       return partials;
     }
@@ -64,14 +71,18 @@ function parseText(text) {
   return partials;
 }
 
-function formatAsPartials(matlabFormatObj) {
+function formatAsPartials(matlabFormatObj: {
+  amps: Array<Array<number>>,
+  times: Array<number>,
+  freqs: Array<number>,
+  soundname: string
+}): Array<Partial> {
   const partials = matlabFormatObj.freqs.map((freq, idx) => {
     const times = matlabFormatObj.times;
     const amps = matlabFormatObj.amps[idx];
     const freqs = times.map(() => freq);
     const partial = {
       id: idx,
-      numFrames: times.length,
       startTime: times[0],
       endTime: times[times.length - 1],
       amps,
@@ -83,13 +94,13 @@ function formatAsPartials(matlabFormatObj) {
   return partials;
 }
 
-function singleSmfImport(inputPath) {
+function singleSmfImport(inputPath: string): Array<any> {
   const data = fs.readFileSync(inputPath, 'binary');
   const smfs = [new JZZ.MIDI.SMF(data)];
   return smfs;
 }
 
-function multiSmfsImport(inputPath) {
+function multiSmfsImport(inputPath: string): Array<any> {
   const filepaths = fs.readdirSync(inputPath).map((filename) => {
     return path.join(inputPath, filename);
   });
@@ -106,4 +117,4 @@ function multiSmfsImport(inputPath) {
   return smfs;
 }
 
-module.exports = { txtImport, jsonImport, smfImport };
+export { txtImport, jsonImport, smfImport };

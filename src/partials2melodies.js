@@ -1,57 +1,61 @@
-const utils = require('./utils');
+/* @flow */
+import { normalize, ftom } from './utils';
+import { NOTE_STATUS, INIT_MELODY, INIT_PARTIAL } from './constants';
+type Melody = typeof INIT_MELODY;
+type Partial = typeof INIT_PARTIAL;
 
-function partials2melodies(_partials) {
+const partials2melodies = (_partials: Array<Partial>): Promise<Array<Melody>> => {
   return new Promise((resolve) => {
     console.log('Generating melody lines from partials...');
 
-    const partials = [..._partials];
+    const partials: Array<Partial> = [..._partials];
 
     //normalize amplitudes
-    utils.normalize(partials);
+    normalize(partials);
 
     const melodies = partials.map((partial) => {
-      const melody = {
+      const melody: Melody = {
         id: partial.id,
-        numFrames: partial.numFrames,
         startTime: partial.startTime,
         endTime: partial.endTime,
         amps: partial.amps,
-        timecode: partial.timecode
+        timecode: partial.timecode,
+        noteOnOffs: [],
+        midiNoteNums: [],
+        deltaCents: []
       };
       melody.noteOnOffs = detectNoteOnNoteOffIndices(partial.amps);
-      [melody.activeNoteNums, melody.deltaCents] = convertFreq2MidiNoteNumAndDeltaCent(
-        partial.freqs,
-        melody.noteOnOffs
-      );
+      const { midiNoteNums, deltaCents } = convertFreq2MidiNoteNumAndDeltaCent(partial.freqs, melody.noteOnOffs);
+      melody.midiNoteNums.push(...midiNoteNums);
+      melody.deltaCents.push(...deltaCents);
       return melody;
     });
     resolve(melodies);
 
     // define subfunctions
-    function detectNoteOnNoteOffIndices(amps) {
-      const [NOTE_ON, NOTE_OFF, NOTHING] = [1, -1, 0];
+    function detectNoteOnNoteOffIndices(amps: Array<number>): Array<$Values<typeof NOTE_STATUS>> {
       return amps.map((amp, idx, amps) => {
         const prevAmp = amps[idx - 1];
         if (idx == 0) {
           if (amp > 0) {
-            return NOTE_ON;
+            return NOTE_STATUS.ON;
           }
-          return NOTHING;
+          return NOTE_STATUS.NO_EVENT;
         }
         if (amp > 0 && prevAmp == 0) {
-          return NOTE_ON;
+          return NOTE_STATUS.ON;
         }
         if (amp == 0 && prevAmp > 0) {
-          return NOTE_OFF;
+          return NOTE_STATUS.OFF;
         }
-        return NOTHING;
+        return NOTE_STATUS.NO_EVENT;
       });
     }
 
     function convertFreq2MidiNoteNumAndDeltaCent(freqs = [], noteOnOffs = []) {
-      const floatNoteNums = freqs.map((freq) => utils.ftom(freq));
+      const floatNoteNums = freqs.map((freq) => ftom(freq));
       const closestNoteNums = floatNoteNums.map((floatNoteNum) => Math.round(floatNoteNum));
-      const midiNoteNums = noteOnOffs.reduce((midiNoteNums, noteOnOff, idx, noteOnOffs) => {
+      const midiNoteNums = noteOnOffs.map(Number).reduce((midiNoteNums, noteOnOff, idx, noteOnOffs) => {
         const prevNoteOnOff = noteOnOffs[idx - 1];
         const closestNoteNum = closestNoteNums[idx];
         const prevMidiNoteNum = midiNoteNums[midiNoteNums.length - 1];
@@ -81,15 +85,15 @@ function partials2melodies(_partials) {
         return midiNoteNums;
       }, []);
       const deltaCents = midiNoteNums.map((midiNoteNum, idx) => {
-        if (midiNoteNums) {
+        if (midiNoteNum) {
           return (floatNoteNums[idx] - midiNoteNum) * 100;
         } else {
           return null;
         }
       });
-      return [midiNoteNums, deltaCents];
+      return { midiNoteNums, deltaCents };
     }
   });
-}
+};
 
-module.exports = { partials2melodies };
+export default partials2melodies;

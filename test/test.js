@@ -30,7 +30,7 @@ describe('partials2melodies', function() {
     assert.typeOf(melodies, 'array');
     melodies.forEach((melody) => {
       assert.property(melody, 'noteOnOffs');
-      assert.property(melody, 'activeNoteNums');
+      assert.property(melody, 'midiNoteNums');
       assert.property(melody, 'deltaCents');
       assert.property(melody, 'amps');
       assert.property(melody, 'timecode');
