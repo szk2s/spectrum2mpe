@@ -33,6 +33,12 @@
             "request": "launch",
             "name": "examples/convertFromMatlab.js",
             "program": "${workspaceFolder}/examples/convertFromMatlab.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "src/import.js",
+            "program": "${workspaceFolder}/src/import.js"
         }
     ]
 }
