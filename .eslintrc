@@ -6,13 +6,15 @@
     "parser": "babel-eslint",
     "extends": [
         "eslint:recommended", 
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:flowtype/recommended"
     ],
     "parserOptions": {
         "ecmaVersion": 2015
     },
     "plugins": [
-        "prettier" 
+        "prettier",
+        "flowtype"
     ],
     "rules": {
         "no-console": "off",
