@@ -1,6 +1,6 @@
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
-const utils = require('./utils');
+import { collectSMFs } from './utils';
 
 const smfPlay = (smf, portIdx) =>
   new Promise((resolve) => {
@@ -13,7 +13,7 @@ const smfPlay = (smf, portIdx) =>
 
 const smfsMultiPlay = (smfs = [], portIdxes = [0]) =>
   new Promise((resolve) => {
-    const collectedSMFs = utils.collectSMFs(smfs);
+    const collectedSMFs = collectSMFs(smfs);
 
     if (collectedSMFs.tracks.length > portIdxes.length) {
       throw new Error('The number of ports is insufficient to play all tracks');
@@ -33,4 +33,4 @@ const outputPorts = () => {
 
 const refreshPorts = JZZ.refresh;
 
-module.exports = { smfPlay, smfsMultiPlay, outputPorts, refreshPorts };
+export { smfPlay, smfsMultiPlay, outputPorts, refreshPorts };

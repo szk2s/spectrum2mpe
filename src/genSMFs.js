@@ -1,9 +1,9 @@
-const utils = require('./utils');
+import { average, calcPitchBend, second2tick } from './utils';
+import _ from 'lodash';
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
-const _ = require('lodash');
 
-function genSMFs(
+const genSMFs = (
   _melodies,
   _songName = 'untitled',
   _option = {
@@ -12,7 +12,7 @@ function genSMFs(
     pitchBendRange: 48,
     defaultVelocity: 30
   }
-) {
+) => {
   return new Promise((resolve) => {
     const melodies = [..._melodies];
     const defaultOption = {
@@ -24,7 +24,7 @@ function genSMFs(
     const { bpm, ppqn, pitchBendRange, defaultVelocity } = _.merge(defaultOption, _option);
 
     console.log('generating SMFs...');
-    melodies.sort((melodyA, melodyB) => utils.average(melodyB.amps) - utils.average(melodyA.amps));
+    melodies.sort((melodyA, melodyB) => average(melodyB.amps) - average(melodyA.amps));
 
     // bundle melodies into bunches of 15 melodies
     const bunchesOfMelodies = [];
@@ -55,7 +55,7 @@ function genSMFs(
 
       // add endtime into track
       const endTime = calcEndTime(oneBunchOfMelodies);
-      track.add(utils.second2Tick(endTime, bpm, ppqn) + ppqn, new JZZ.MIDI.smfEndOfTrack());
+      track.add(second2tick(endTime, bpm, ppqn) + ppqn, new JZZ.MIDI.smfEndOfTrack());
 
       tracks.push(track);
       return tracks;
@@ -81,14 +81,14 @@ function genSMFs(
         switch (noteOnOff) {
           case 1:
             track.add(
-              utils.second2Tick(melody.timecode[frameIdx], bpm, ppqn),
-              new JZZ.MIDI.noteOn(ch, melody.activeNoteNums[frameIdx], defaultVelocity)
+              second2tick(melody.timecode[frameIdx], bpm, ppqn),
+              new JZZ.MIDI.noteOn(ch, melody.midiNoteNums[frameIdx], defaultVelocity)
             );
             break;
           case -1:
             track.add(
-              utils.second2Tick(melody.timecode[frameIdx], bpm, ppqn),
-              new JZZ.MIDI.noteOff(ch, melody.activeNoteNums[frameIdx])
+              second2tick(melody.timecode[frameIdx], bpm, ppqn),
+              new JZZ.MIDI.noteOff(ch, melody.midiNoteNums[frameIdx])
             );
             break;
           default:
@@ -99,21 +99,21 @@ function genSMFs(
 
     function addPitchBendMsgs(melody, track, ch) {
       melody.deltaCents.forEach((deltaCent, frameIdx) => {
-        if (melody.activeNoteNums[frameIdx]) {
+        if (melody.midiNoteNums[frameIdx]) {
           let byte2;
           let byte3;
-          [byte2, byte3] = utils.calcPitchBend(deltaCent, pitchBendRange);
+          [byte2, byte3] = calcPitchBend(deltaCent, pitchBendRange);
           let byte1 = '0x' + (ch + 224).toString(16).toUpperCase();
-          track.add(utils.second2Tick(melody.timecode[frameIdx], bpm, ppqn), new JZZ.MIDI([byte1, byte2, byte3]));
+          track.add(second2tick(melody.timecode[frameIdx], bpm, ppqn), new JZZ.MIDI([byte1, byte2, byte3]));
         }
       });
     }
 
     function addPressureMsgs(melody, track, ch) {
       melody.amps.forEach((amp, frameIdx) => {
-        if (melody.activeNoteNums[frameIdx]) {
+        if (melody.midiNoteNums[frameIdx]) {
           track.add(
-            utils.second2Tick(melody.timecode[frameIdx], bpm, ppqn),
+            second2tick(melody.timecode[frameIdx], bpm, ppqn),
             new JZZ.MIDI.pressure(ch, Math.floor(amp * 127))
           );
         }
@@ -125,6 +125,6 @@ function genSMFs(
       return Math.max(...endTimes);
     }
   });
-}
+};
 
-module.exports = { genSMFs };
+export default genSMFs;

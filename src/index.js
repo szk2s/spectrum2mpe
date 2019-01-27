@@ -1,15 +1,15 @@
 /* @flow */
 
-const { utils } = require('./utils');
-const { txtImport, jsonImport, smfImport } = require('./import');
-const { partials2melodies } = require('./partials2melodies');
-const { genSMFs } = require('./genSMFs');
-const { smfExport, smfsBatchExport } = require('./export');
-const { convertFromSpear } = require('./convert');
-const { smfPlay, smfsMultiPlay, outputPorts, refreshPorts } = require('./play');
-const { reducePartials } = require('./reducePartials');
+import { utils } from './utils';
+import { txtImport, jsonImport, smfImport } from './import';
+import partials2melodies from './partials2melodies';
+import genSMFs from './genSMFs';
+import { smfExport, smfsBatchExport } from './export';
+import convertFromSpear from './convert';
+import { smfPlay, smfsMultiPlay, outputPorts, refreshPorts } from './play';
+import reducePartials from './reducePartials';
 
-module.exports = {
+export {
   utils,
   txtImport,
   jsonImport,

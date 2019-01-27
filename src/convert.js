@@ -1,9 +1,9 @@
-const path = require('path');
-const _ = require('lodash');
-const { txtImport } = require('./import');
-const { partials2melodies } = require('./partials2melodies');
-const { genSMFs } = require('./genSMFs');
-const { smfsBatchExport } = require('./export');
+import path from 'path';
+import _ from 'lodash';
+import { txtImport } from './import';
+import partials2melodies from './partials2melodies';
+import genSMFs from './genSMFs';
+import { smfsBatchExport } from './export';
 
 const convertFromSpear = (
   inputFilePath,
@@ -33,4 +33,4 @@ const convertFromSpear = (
     resolve();
   });
 
-module.exports = { convertFromSpear };
+export default convertFromSpear;

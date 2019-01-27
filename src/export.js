@@ -1,8 +1,8 @@
-const _ = require('lodash');
-const fs = require('fs');
-const path = require('path');
+import _ from 'lodash';
+import * as fs from 'fs';
+import * as path from 'path';
 
-function smfExport(smf, outputFilePath = './untitled.mid') {
+const smfExport = (smf, outputFilePath = './untitled.mid') => {
   return new Promise((resolve) => {
     const fileName = path.parse(outputFilePath).base;
     console.log('Exporting ' + fileName + ' ...');
@@ -13,9 +13,9 @@ function smfExport(smf, outputFilePath = './untitled.mid') {
     console.log(outputFilePath);
     resolve();
   });
-}
+};
 
-function smfsBatchExport(
+const smfsBatchExport = (
   smfs,
   songName = 'untitled',
   destination = '.',
@@ -23,7 +23,7 @@ function smfsBatchExport(
     makeOutputFolder: true,
     outputFolderName: 'output'
   }
-) {
+) => {
   return new Promise(async (resolve) => {
     const defaultOption = {
       makeOutputFolder: true,
@@ -55,9 +55,6 @@ function smfsBatchExport(
     console.log('All files have been exported successfully!!');
     resolve();
   });
-}
-
-module.exports = {
-  smfExport,
-  smfsBatchExport
 };
+
+export { smfExport, smfsBatchExport };
