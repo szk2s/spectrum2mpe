@@ -1,7 +1,9 @@
 # spectrum2mpe
 
 
-> Convert spectrum data from MATLAB or SPEAR, into Standard MIDI File which is compatible with MPE applications.
+> Convert spectrum data from MATLAB or SPEAR, into Standard MIDI File which is compatible with MPE applications.  
+> This is the core engine of [spectral-mpe-editor](https://github.com/szk2s/spectral-mpe-editor) 
+> ***Listen to the demo sounds [here](https://drive.google.com/drive/folders/1xU2hxmzMhu4SbaaS6ggDsQUYxpIQMYT8?usp=sharing)!!***
 
 ## Table of Contents
 
@@ -9,6 +11,11 @@
   - [Table of Contents](#table-of-contents)
   - [Install](#install)
   - [Usage](#usage)
+  - [Development](#development)
+    - [Build](#build)
+    - [Run test](#run-test)
+    - [Lint](#lint)
+    - [Check types](#check-types)
   - [References](#references)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
@@ -19,24 +26,53 @@ First, git clone or download this repository.
 
 Then install dependencies.
 ```
-npm i
+yarn add
 ```
+
 Run example code and see the result.
 ```
-node examples/convert.js
+node examples/convertFromSpear.js
 ```
 
 ## Usage
+You can use s2m in your project like
 ```
+const s2m = require('s2m');
+
 ( async () => {
-  const s2m = require('s2m');
   await s2m.convertFromSpear('path/to/file');
 })();
 ```
-(await s2m.convertFromSpear('path/to/file');})();
 For more information, check example code `./examples/convert.js`
 
+
+## Development
+You can use following commands
+### Build  
+Transpile `./src` to destination folder `./lib`
+```
+yarn build
+```
+You need do this only one time.
+
+### Run test
+```
+yarn test
+```
+
+### Lint
+```
+yarn lint
+```
+
+### Check types
+```
+yarn flow
+```
+
 ## References
+[Demo Sounds](https://drive.google.com/drive/folders/1xU2hxmzMhu4SbaaS6ggDsQUYxpIQMYT8?usp=sharing)  
+[spectral-mpe-editor](https://github.com/szk2s/spectral-mpe-editor)  
 [What's MPE?](http://mpe.js.org/ "mpe.js")  
 [Spear (recommended spectral analysis tool)](http://www.klingbeil.com/spear/ "Spear")  
 [How to make spectrum data with MATLAB?](https://github.com/szk2s/Spectral-Analysis "Spectral-Analysis")  
