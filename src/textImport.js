@@ -10,7 +10,7 @@ import _ from 'lodash';
 // body has alternate lines of metadata line and partial data line.
 // partial data is repetition of numbers [time, freq, amp, time, freq, amp...]
 
-const textImport = ({ filepath }: { filepath: string }): Promise<Array<Partial>> => {
+const textImport = (filepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
   const text = fs.readFileSync(filepath).toString();
   const partials = parseText(text);

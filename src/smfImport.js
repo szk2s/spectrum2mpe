@@ -9,7 +9,7 @@ import * as path from 'path';
 // This function imports smfs (standard midi files),
 // converts them into array of JZZ.MIDI.SMF instances
 
-const smfImport = ({ filepath }: { filepath: string }): Promise<Array<any>> => {
+const smfImport = (filepath: string): Promise<Array<any>> => {
   if (fs.lstatSync(filepath).isFile() && mime.lookup(filepath) == 'audio/midi') {
     const smfs = singleSmfImport(filepath);
     return Promise.resolve(smfs);

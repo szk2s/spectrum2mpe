@@ -6,7 +6,7 @@ let partials: Array<Partial>;
 let melodies: Array<Melody>;
 
 test('should return an array of partials', async () => {
-  partials = await s2m.textImport({ filepath: path.join(__dirname, '../assets/txt/large_bowl.txt') });
+  partials = await s2m.textImport(path.join(__dirname, '../assets/txt/large_bowl.txt'));
   const partial = partials[14];
   expect(typeof partial.id).toBe('number');
   const point = partials[5].points[6];
@@ -16,9 +16,7 @@ test('should return an array of partials', async () => {
 });
 
 test('should return an array of partials', async () => {
-  const partials: Array<Partial> = await s2m.jsonImport({
-    filepath: path.join(__dirname, '../assets/json/bird.json')
-  });
+  const partials: Array<Partial> = await s2m.jsonImport(path.join(__dirname, '../assets/json/bird.json'));
   const partial = partials[6];
   expect(typeof partial.id).toBe('number');
   const point = partials[23].points[11];

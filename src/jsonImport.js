@@ -5,7 +5,7 @@ import * as fs from 'fs';
 // Matlab format is something like "X axis = time, Y axis = freq, Value = amp"
 // Times and freqs are 1d Array, but amp is 2d Array
 
-const jsonImport = ({ filepath }: { filepath: string }): Promise<Array<Partial>> => {
+const jsonImport = (filepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
   const inputText = fs.readFileSync(filepath, 'utf8');
   const matlabFormatObj = JSON.parse(inputText);
