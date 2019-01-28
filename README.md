@@ -16,6 +16,7 @@
     - [Run test](#run-test)
     - [Lint](#lint)
     - [Check types](#check-types)
+    - [Add library definitions for npm modules](#add-library-definitions-for-npm-modules)
   - [References](#references)
   - [Maintainers](#maintainers)
   - [Contributing](#contributing)
@@ -68,6 +69,11 @@ yarn lint
 ### Check types
 ```
 yarn flow
+```
+
+### Add library definitions for npm modules
+```
+ yarn flow-typed install lodash@4.17.11
 ```
 
 ## References
