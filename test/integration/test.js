@@ -1,5 +1,5 @@
 const { expect, assert } = require('chai');
-const s2m = require('..');
+const s2m = require('../..');
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
 const mime = require('mime-types');
@@ -13,7 +13,7 @@ let smfs;
 
 describe('txtImport', function() {
   it('should return an array of partials', async function() {
-    partials = await s2m.txtImport(__dirname + '/assets/txt/large_bowl.txt');
+    partials = await s2m.txtImport(path.join(__dirname, '../assets/txt/large_bowl.txt'));
     assert.typeOf(partials, 'array');
     partials.forEach((partial) => {
       assert.property(partial, 'freqs');
@@ -67,7 +67,7 @@ describe('smfExport', function() {
 
 describe('Convert', function() {
   it('should export midi file', async function() {
-    await s2m.convertFromSpear(__dirname + '/assets/txt/large_bowl.txt', {
+    await s2m.convertFromSpear(path.join(__dirname, '../assets/txt/large_bowl.txt'), {
       outputDirName: __dirname + '/output',
       makeOutputFolder: true,
       outputFolderName: 'exported-with-convertFromSpear-function'
