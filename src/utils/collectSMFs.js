@@ -1,4 +1,5 @@
-const collectSMFs = (smfs) => {
+/* @flow */
+const collectSMFs = (smfs: Array<any>): collectedSMFs => {
   const initialValue = {
     ppqn: smfs[0].ppqn,
     type: smfs[0].type,
@@ -15,5 +16,11 @@ const collectSMFs = (smfs) => {
     return collection;
   }, initialValue);
   return collectedSMFs;
+};
+
+type collectedSMFs = {
+  ppqn: number,
+  type: number,
+  tracks: Array<any>
 };
 export default collectSMFs;

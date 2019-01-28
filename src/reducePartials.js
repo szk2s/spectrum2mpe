@@ -1,4 +1,5 @@
-const reducePartials = (partials) =>
+/* @flow */
+const reducePartials = (partials: Array<Partial>): Promise<void> =>
   new Promise((resolve) => {
     console.log('Reducing number of partials');
     partials.sort((a, b) => a.startTime - b.startTime);
@@ -9,7 +10,6 @@ const reducePartials = (partials) =>
           partials[i].timecode.push(...partials[j].timecode);
           partials[i].amps.push(...partials[j].amps);
           partials[i].freqs.push(...partials[j].freqs);
-          partials[i].numFrames = partials[i].numFrames + partials[j].numFrames;
           partials.splice(j, 1);
         } else {
           j = j + 1;

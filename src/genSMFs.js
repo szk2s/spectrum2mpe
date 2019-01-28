@@ -1,18 +1,19 @@
+/* @flow */
 import { average, calcPitchBend, second2tick } from './utils';
 import _ from 'lodash';
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
 
 const genSMFs = (
-  _melodies,
-  _songName = 'untitled',
-  _option = {
+  _melodies: Array<Melody>,
+  _songName: string = 'untitled',
+  _option: Object = {
     ppqn: 48, // ticks per quarter note
     bpm: 120,
     pitchBendRange: 48,
     defaultVelocity: 30
   }
-) => {
+): Promise<Array<any>> => {
   return new Promise((resolve) => {
     const melodies = [..._melodies];
     const defaultOption = {
@@ -70,13 +71,13 @@ const genSMFs = (
     resolve(smfs);
 
     // define subfunctions
-    function addMelodyToTrack(melody, track, ch) {
+    function addMelodyToTrack(melody: Melody, track: any, ch: number): void {
       addNoteMsgs(melody, track, ch);
       addPitchBendMsgs(melody, track, ch);
       addPressureMsgs(melody, track, ch);
     }
 
-    function addNoteMsgs(melody, track, ch) {
+    function addNoteMsgs(melody: Melody, track: any, ch: number): void {
       melody.noteOnOffs.forEach((noteOnOff, frameIdx) => {
         switch (noteOnOff) {
           case 1:
@@ -97,9 +98,9 @@ const genSMFs = (
       });
     }
 
-    function addPitchBendMsgs(melody, track, ch) {
+    function addPitchBendMsgs(melody: Melody, track: any, ch: number): void {
       melody.deltaCents.forEach((deltaCent, frameIdx) => {
-        if (melody.midiNoteNums[frameIdx]) {
+        if (deltaCent) {
           let byte2;
           let byte3;
           [byte2, byte3] = calcPitchBend(deltaCent, pitchBendRange);
@@ -109,7 +110,7 @@ const genSMFs = (
       });
     }
 
-    function addPressureMsgs(melody, track, ch) {
+    function addPressureMsgs(melody: Melody, track: any, ch: number): void {
       melody.amps.forEach((amp, frameIdx) => {
         if (melody.midiNoteNums[frameIdx]) {
           track.add(
@@ -120,7 +121,7 @@ const genSMFs = (
       });
     }
 
-    function calcEndTime(oneBunchOfMelodies) {
+    function calcEndTime(oneBunchOfMelodies: Array<Melody>): number {
       const endTimes = oneBunchOfMelodies.map((melody) => melody.endTime);
       return Math.max(...endTimes);
     }

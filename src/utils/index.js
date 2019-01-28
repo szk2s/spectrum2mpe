@@ -1,3 +1,4 @@
+/* @flow */
 import collectSMFs from './collectSMFs';
 import normalize from './normalize';
 import ftom from './ftom';

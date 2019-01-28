@@ -1,3 +1,4 @@
+/* @flow */
 import path from 'path';
 import _ from 'lodash';
 import { txtImport } from './import';
@@ -6,13 +7,13 @@ import genSMFs from './genSMFs';
 import { smfsBatchExport } from './export';
 
 const convertFromSpear = async (
-  inputFilePath,
-  _option = {
+  inputFilePath: string,
+  _option: Object = {
     outputDirName: path.dirname(inputFilePath),
     makeOutputFolder: true,
     outputFolderName: 'output'
   }
-) => {
+): Promise<void> => {
   const defaultOption = {
     outputDirName: path.dirname(inputFilePath),
     makeOutputFolder: true,
@@ -29,6 +30,7 @@ const convertFromSpear = async (
     outputFolderName: outputFolderName
   });
   console.log('Completed!');
+  return Promise.resolve();
 };
 
 export default convertFromSpear;

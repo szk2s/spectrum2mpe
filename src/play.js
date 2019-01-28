@@ -1,8 +1,9 @@
+/* @flow */
 const JZZ = require('jzz');
 require('jzz-midi-smf')(JZZ);
 import { collectSMFs } from './utils';
 
-const smfPlay = (smf, portIdx) =>
+const smfPlay = (smf: any, portIdx: number): Promise<void> =>
   new Promise((resolve) => {
     const midiout = JZZ().openMidiOut(portIdx);
     const player = smf.player();
@@ -11,7 +12,7 @@ const smfPlay = (smf, portIdx) =>
     resolve();
   });
 
-const smfsMultiPlay = (smfs = [], portIdxes = [0]) =>
+const smfsMultiPlay = (smfs: Array<any> = [], portIdxes: Array<number> = [0]): Promise<void> =>
   new Promise((resolve) => {
     const collectedSMFs = collectSMFs(smfs);
 
@@ -27,8 +28,15 @@ const smfsMultiPlay = (smfs = [], portIdxes = [0]) =>
     resolve();
   });
 
-const outputPorts = () => {
+const outputPorts = (): Array<Port> => {
   return JZZ().info().outputs;
+};
+
+type Port = {
+  name: string,
+  manufacturer: string,
+  version: string,
+  engine: string
 };
 
 const refreshPorts = JZZ.refresh;

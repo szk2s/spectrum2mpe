@@ -1,4 +1,5 @@
-const average = (nums) => {
+/* @flow */
+const average = (nums: Array<number>): number => {
   const sum = nums.reduce((prev, current) => {
     return prev + current;
   });

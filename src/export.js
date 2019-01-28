@@ -1,8 +1,10 @@
+/* @flow */
+
 import _ from 'lodash';
 import * as fs from 'fs';
 import * as path from 'path';
 
-const smfExport = (smf, outputFilePath = './untitled.mid') => {
+const smfExport = (smf: any, outputFilePath: string = './untitled.mid'): Promise<void> => {
   return new Promise((resolve) => {
     const fileName = path.parse(outputFilePath).base;
     console.log('Exporting ' + fileName + ' ...');
@@ -16,14 +18,14 @@ const smfExport = (smf, outputFilePath = './untitled.mid') => {
 };
 
 const smfsBatchExport = (
-  smfs,
-  songName = 'untitled',
-  destination = '.',
-  _option = {
+  smfs: Array<any>,
+  songName: string = 'untitled',
+  destination: string = '.',
+  _option: Object = {
     makeOutputFolder: true,
     outputFolderName: 'output'
   }
-) => {
+): Promise<void> => {
   return new Promise(async (resolve) => {
     const defaultOption = {
       makeOutputFolder: true,
