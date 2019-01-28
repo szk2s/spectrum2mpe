@@ -12,7 +12,7 @@ const smfExport = (smf: any, outputFilePath: string = './untitled.mid'): Promise
     fs.writeFileSync(outputFilePath, smf.dump(), 'binary');
     console.log(fileName + ' exported!');
     console.log('The result file is at');
-    console.log(outputFilePath);
+    console.log(path.dirname(outputFilePath));
     resolve();
   });
 };
