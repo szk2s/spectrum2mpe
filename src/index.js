@@ -8,6 +8,9 @@ import { smfExport, smfsBatchExport } from './export';
 import convertFromSpear from './convert';
 import { smfPlay, smfsMultiPlay, outputPorts, refreshPorts } from './play';
 import reducePartials from './reducePartials';
+import { FREQ_LIMIT } from './constants';
+import fillBlankTime from './fillBlankTime';
+import extractPeakFreqs from './extractPeakFreqs';
 
 export {
   utils,
@@ -23,5 +26,8 @@ export {
   smfsMultiPlay,
   outputPorts,
   refreshPorts,
-  reducePartials
+  reducePartials,
+  FREQ_LIMIT,
+  fillBlankTime,
+  extractPeakFreqs
 };

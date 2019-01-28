@@ -1,0 +1,24 @@
+@startuml
+skinparam Padding 14
+
+start
+:partials;
+:comvertPartials2Frames();
+:frames;
+
+while (frames.forEach)
+  partition markPeaks() {
+	:collectPeakIDs(points);
+  :mainPeaks subPeaks;
+	while (while: missingNumPeaks > 0)
+  :collectPeakIDs(subPeaks);
+  endwhile
+  :mark peaks by result ID;
+}
+endwhile (all peaks marked)
+:compressFrames();
+:convertFrames2partials;
+
+stop
+
+@enduml

@@ -37,8 +37,8 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "src/import.js",
-            "program": "${workspaceFolder}/src/import.js"
-        }
+            "name": "examples/compressPartials.js",
+            "program": "${workspaceFolder}/examples/compressPartials.js"
+        },
     ]
 }
