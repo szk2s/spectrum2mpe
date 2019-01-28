@@ -12,7 +12,9 @@
     "test:unit": "jest test/unit --watch",
     "lint": "eslint . --fix",
     "build": "babel src/ -d lib/",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run build",
+    "predebug": "yarn run build",
+    "debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "dependencies": {
     "glob": "^7.1.3",
