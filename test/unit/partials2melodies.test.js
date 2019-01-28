@@ -1,8 +1,9 @@
 /* @flow */
-const s2m = require('..');
+const s2m = require('../..');
+const genMockPartials = require('../helpers/genMockPartials');
 
 test('should return an array of melodies', async () => {
-  const partials: Array<Partial> = await s2m.txtImport(__dirname + '/assets/txt/large_bowl.txt');
+  const partials = await genMockPartials();
   const melodies: Array<Melody> = await s2m.partials2melodies(partials);
   melodies.forEach((melody) => {
     expect(melody).toHaveProperty('noteOnOffs');

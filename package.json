@@ -7,8 +7,9 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest",
     "pretest": "yarn run build",
+    "test": "jest test/integration",
+    "test:unit": "jest test/unit",
     "lint": "eslint . --fix",
     "build": "babel src/ -d lib/",
     "prepublish": "yarn run build"
@@ -46,8 +47,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint",
-      "pre-push": "npm test"
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test"
     }
   },
   "repository": {
