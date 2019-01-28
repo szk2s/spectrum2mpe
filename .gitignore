@@ -4,6 +4,8 @@
 *.mid
 !examples/assets/mid/cricket.mid
 
+examples/assets/
+
 lib
 
 # Logs
