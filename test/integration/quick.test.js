@@ -6,23 +6,23 @@ let partials: Array<Partial>;
 let melodies: Array<Melody>;
 
 test('should return an array of partials', async () => {
-  partials = await s2m.txtImport(path.join(__dirname, '../assets/txt/large_bowl.txt'));
+  partials = await s2m.textImport({ filepath: path.join(__dirname, '../assets/txt/large_bowl.txt') });
   const partial = partials[14];
-  expect(partial).toHaveProperty('id');
-  expect(partial).toHaveProperty('freqs');
-  expect(partial).toHaveProperty('amps');
-  expect(partial).toHaveProperty('timecode');
-  expect(partial).toHaveProperty('startTime');
-  expect(partial).toHaveProperty('endTime');
+  expect(typeof partial.id).toBe('number');
+  const point = partials[5].points[6];
+  expect(typeof point.time).toBe('number');
+  expect(typeof point.freq).toBe('number');
+  expect(typeof point.amp).toBe('number');
 });
 
-test('should return an array of melodies', async () => {
-  melodies = await s2m.partials2melodies(partials);
-  const melody = melodies[5];
-  expect(melody).toHaveProperty('noteOnOffs');
-  expect(melody).toHaveProperty('midiNoteNums');
-  expect(melody).toHaveProperty('deltaCents');
-  expect(melody).toHaveProperty('timecode');
-  expect(melody).toHaveProperty('amps');
-  expect(melody).toHaveProperty('endTime');
+test('should return an array of partials', async () => {
+  const partials: Array<Partial> = await s2m.jsonImport({
+    filepath: path.join(__dirname, '../assets/json/bird.json')
+  });
+  const partial = partials[6];
+  expect(typeof partial.id).toBe('number');
+  const point = partials[23].points[11];
+  expect(typeof point.time).toBe('number');
+  expect(typeof point.freq).toBe('number');
+  expect(typeof point.amp).toBe('number');
 });

@@ -1,7 +1,9 @@
 /* @flow */
 
 import * as utils from './utils';
-import { txtImport, jsonImport, smfImport } from './import';
+import textImport from './textImport';
+import jsonImport from './jsonImport';
+import smfImport from './smfImport';
 import partials2melodies from './partials2melodies';
 import genSMFs from './genSMFs';
 import { smfExport, smfsBatchExport } from './export';
@@ -11,7 +13,7 @@ import reducePartials from './reducePartials';
 
 export {
   utils,
-  txtImport,
+  textImport,
   jsonImport,
   smfImport,
   partials2melodies,
