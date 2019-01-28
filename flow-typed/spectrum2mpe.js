@@ -24,3 +24,8 @@ declare type NoteStatus = $ReadOnly<{
   OFF: -1,
   NO_EVENT: 0
 }>;
+
+declare module "spectrum2mpe" {
+  declare export var txtImport: (inputFilepath: string) => Promise<Array<Partial>>;
+  declare export var jsonImport: (inputFilepath: string) => Promise<Array<Partial>>;
+}
