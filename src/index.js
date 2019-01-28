@@ -1,6 +1,6 @@
 /* @flow */
 
-import { utils } from './utils';
+import * as utils from './utils';
 import { txtImport, jsonImport, smfImport } from './import';
 import partials2melodies from './partials2melodies';
 import genSMFs from './genSMFs';
