@@ -1,10 +1,21 @@
 /* @flow */
 declare type Partial = {
-  id: number,
-  points: Array<{
-    time: number,
-    freq: number,
-    amp: number
+  +id: number,
+  +points: Array<{
+    +time: number,
+    +freq: number,
+    +amp: number
+  }>
+};
+
+declare type Melody = {
+  +id: number,
+  +points: Array<{
+    +time: number,
+    +noteStatus: number,
+    +midiNoteNum: number,
+    +deltaCent: 
+    +amp: number
   }>
 };
 
