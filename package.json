@@ -9,6 +9,7 @@
   "scripts": {
     "pretest": "yarn run build",
     "test": "jest test/integration",
+    "pretest:unit": "yarn run build",
     "test:unit": "jest test/unit --watch",
     "lint": "eslint . --fix",
     "build": "babel src/ -d lib/",
