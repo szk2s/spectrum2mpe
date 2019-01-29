@@ -1,6 +1,11 @@
 const path = require('path');
 const s2m = require('../../lib');
+const fs = require('fs');
+
 module.exports = async () => {
-  const partials = await s2m.txtImport(path.join(__dirname, '../assets/txt/large_bowl.txt'));
+  const json = fs.readFileSync(path.join(__dirname, './constants/mockData.json'), 'utf8');
+  const mockData = JSON.parse(json);
+  console.log(mockData);
+  const { partials } = mockData;
   return partials;
 };
