@@ -16,7 +16,7 @@ const txtImport = (inputFilepath: string): Promise<Array<Partial>> => {
 const jsonImport = (inputFilepath: string): Promise<Array<Partial>> => {
   console.log('Importing files...');
   const inputText = fs.readFileSync(inputFilepath, 'utf8');
-  const matlabFormatObj = JSON.parse(inputText);
+  const matlabFormatObj = JSON.parse(inputText).extracted_partials;
   const partials = formatAsPartials(matlabFormatObj);
   return Promise.resolve(partials);
 };
