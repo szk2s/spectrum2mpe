@@ -53,10 +53,10 @@ const partials2melodies = (_partials: Array<Partial>): Promise<Array<Melody>> =>
     function convertFreq2MidiNoteNumAndDeltaCent(freqs = [], noteOnOffs = []) {
       const floatNoteNums = freqs.map((freq) => ftom(freq));
       const closestNoteNums = floatNoteNums.map((floatNoteNum) => Math.round(floatNoteNum));
-      const midiNoteNums = noteOnOffs.map(Number).reduce((midiNoteNums, noteOnOff, idx, noteOnOffs) => {
-        const prevNoteOnOff = noteOnOffs[idx - 1];
+      const midiNoteNums = noteOnOffs.reduce((midiNoteNums, noteOnOff, idx, noteOnOffs) => {
+        const prevNoteOnOff = noteOnOffs[idx - 1] || 0;
         const closestNoteNum = closestNoteNums[idx];
-        const prevMidiNoteNum = midiNoteNums[midiNoteNums.length - 1];
+        const prevMidiNoteNum = midiNoteNums[midiNoteNums.length - 1] || null;
         const [NOTE_ON, NOTE_OFF, NOTHING] = [1, -1, 0];
         if (noteOnOff === NOTE_ON) {
           midiNoteNums.push(closestNoteNum);
