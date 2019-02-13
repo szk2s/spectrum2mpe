@@ -4,7 +4,7 @@ const _ = require('lodash');
 const { FREQ_LIMIT } = s2m;
 
 const compress = async () => {
-  const partials = await s2m.txtImport(__dirname + '/assets/txt/hokekyo.txt');
+  const partials = await s2m.txtImport(__dirname + '/assets/txt/cricket_pulse_1.txt');
   // filter some partials which is out of frequency range.
   const filteredPartials = partials.filter((partial) => {
     const meanFreq = _.mean(partial.freqs);
@@ -12,11 +12,12 @@ const compress = async () => {
   });
   await s2m.fillBlankTime(filteredPartials);
   // compress 135 partials into 15 partials.
-  const melodies = await s2m.partials2melodies(filteredPartials);
-  const smfs = await s2m.genSMFs(melodies, 'hokekyo', {
+  const compressedPartials = await s2m.extractPeakFreqs(filteredPartials, 15);
+  const melodies = await s2m.partials2melodies(compressedPartials);
+  const smfs = await s2m.genSMFs(melodies, 'cricket_pulse_1', {
     pitchBendRange: 127
   });
-  await s2m.smfsBatchExport(smfs, 'hokekyo', __dirname + '/output', {
+  await s2m.smfsBatchExport(smfs, 'cricket_pulse_1', __dirname + '/output', {
     makeOutputFolder: true,
     outputFolderName: moment(new Date()).format('YYMMDD')
   });
