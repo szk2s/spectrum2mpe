@@ -40,5 +40,11 @@
             "name": "examples/compressPartials.js",
             "program": "${workspaceFolder}/examples/compressPartials.js"
         },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "examples/convertToParticleReverb.js",
+            "program": "${workspaceFolder}/examples/convertToParticleReverb.js"
+        },
     ]
 }
